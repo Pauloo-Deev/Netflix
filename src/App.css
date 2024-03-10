@@ -1,0 +1,14 @@
+.App {
+  word-wrap: break-word;
+}
+
+ul {
+  display: flex;
+  width: 200px;
+  flex-direction: row;
+}
+
+li {
+  margin: 15px;
+  list-style: none;
+}
