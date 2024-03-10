@@ -117,7 +117,7 @@ function App() {
           ))}
         </ul>
       </div>
-      <p>drama</p>
+      <p>Drama</p>
       <ul>
         {data.map((movie, id) => (
           <li key={id}>
