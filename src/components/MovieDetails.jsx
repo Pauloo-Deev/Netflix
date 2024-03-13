@@ -13,7 +13,6 @@ const MovieDetails = () => {
         const response = await fetch(`${API_BASE}/${id}`);
         const movieData = await response.json();
         setMovieDetails(movieData);
-        console.log(movieData);
       } catch (error) {
         console.error(error);
       }

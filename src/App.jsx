@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
-import MovieDetails from "./components/MovieDetails"; // Importe o componente para exibir os detalhes do filme
+import MovieDetails from "./components/MovieDetails";
 import "./App.css";
 
 const API_BASE = "https://api.tvmaze.com/shows";
@@ -65,7 +65,7 @@ function App() {
                           to={`/movies/${movie.id}`}
                           key={index}
                           className="movie"
-                        >
+                        > 
                           <h3>{movie.name}</h3>
                           <img src={movie.image} alt={movie.name} />
                         </Link>
@@ -81,6 +81,11 @@ function App() {
                 <MovieDetails key={props.match.params.id} {...props} />
               )}
             />
+            <Route path="/movies/search">
+              <div>
+              <h1>teste</h1>
+              </div>
+            </Route>
           </Switch>
         </div>
       </div>
