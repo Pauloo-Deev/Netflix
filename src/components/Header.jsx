@@ -1,15 +1,16 @@
 import React from "react";
+import "./Header.css"; 
 
-import "./Header.css";
-
-export default function Header() {
+function Header() {
   return (
-    <header>
-      <ul>
-        <a href="">
-          <li>Netflix</li>
-        </a>
-      </ul>
-    </header>
+    <div className="header">
+      <img
+        className="header__logo"
+        src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
+        alt="Netflix Logo"
+      />
+    </div>
   );
 }
+
+export default Header;

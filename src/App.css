@@ -12,3 +12,61 @@ li {
   margin: 15px;
   list-style: none;
 }
+
+.container {
+  padding-top: 70px;
+
+  background-color: #000;
+}
+
+.genre-container {
+  overflow-y: hidden;
+}
+
+.carousel {
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.movie {
+  display: inline-block;
+  width: 200px;
+  margin-right: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.movie img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.movie h3 {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.movie:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.carousel-container {
+  padding: 20px;
+}
+
+.genre-container h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
