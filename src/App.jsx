@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
+import MovieDetails from "./components/MovieDetails"; // Importe o componente para exibir os detalhes do filme
+import "./App.css";
 
 const API_BASE = "https://api.tvmaze.com/shows";
 
@@ -47,26 +49,42 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <Header />
-      <div className="container">
-        {Object.entries(genresData).map(([genre, movies]) => (
-          <div key={genre} className="genre-container">
-            <h2>{genre}</h2>
-            <div className="carousel">
-              <div className="carousel-container">
-                {movies.map((movie, index) => (
-                  <div key={index} className="movie">
-                    <img src={movie.image} alt={movie.name} />
-                    <h3>{movie.name}</h3>
+    <Router>
+      <div className="App">
+        <Header />
+        <div className="container">
+          <Switch>
+            <Route exact path="/">
+              {Object.entries(genresData).map(([genre, movies]) => (
+                <div key={genre} className="genre-container">
+                  <h2>{genre}</h2>
+                  <div className="carousel">
+                    <div className="carousel-container">
+                      {movies.map((movie, index) => (
+                        <Link
+                          to={`/movies/${movie.id}`}
+                          key={index}
+                          className="movie"
+                        >
+                          <h3>{movie.name}</h3>
+                          <img src={movie.image} alt={movie.name} />
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
+                </div>
+              ))}
+            </Route>
+            <Route
+              path="/movies/:id"
+              render={(props) => (
+                <MovieDetails key={props.match.params.id} {...props} />
+              )}
+            />
+          </Switch>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 

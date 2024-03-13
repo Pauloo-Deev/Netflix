@@ -1,0 +1,22 @@
+.movie-details {
+  height: 100vh;
+  margin: 0 auto;
+  padding: 20px;
+  color: #fff;
+}
+
+.movie-details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.movie-details img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.movie-details p {
+  font-size: 16px;
+  line-height: 1.5;
+}
