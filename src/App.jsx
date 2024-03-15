@@ -16,6 +16,8 @@ function App() {
     Horror: [],
     Romance: [],
   });
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResult, setSearchResult] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -48,10 +50,19 @@ function App() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (searchTerm.trim() !== "") {
+      const foundMovie = Object.values(genresData).flat().find(movie => movie.name.toLowerCase() === searchTerm.toLowerCase());
+      setSearchResult(foundMovie);
+    } else {
+      setSearchResult(null);
+    }
+  }, [searchTerm, genresData]);
+
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Header setSearchTerm={setSearchTerm} />
         <div className="container">
           <Switch>
             <Route exact path="/">
@@ -65,7 +76,7 @@ function App() {
                           to={`/movies/${movie.id}`}
                           key={index}
                           className="movie"
-                        > 
+                        >
                           <h3>{movie.name}</h3>
                           <img src={movie.image} alt={movie.name} />
                         </Link>
@@ -83,7 +94,15 @@ function App() {
             />
             <Route path="/movies/search">
               <div>
-              <h1>teste</h1>
+                <h1>Resultado da Busca</h1>
+                {searchResult ? (
+                  <Link to={`/movies/${searchResult.id}`} className="search-result">
+                    <h3>{searchResult.name}</h3>
+                    <img src={searchResult.image} alt={searchResult.name} />
+                  </Link>
+                ) : (
+                  <p>Nenhum filme encontrado com o nome "{searchTerm}"</p>
+                )}
               </div>
             </Route>
           </Switch>

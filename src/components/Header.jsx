@@ -1,9 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoSearch } from "react-icons/io5";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, useHistory } from "react-router-dom";
 import "./Header.css";
 
 function Header() {
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const history = useHistory();
+
+  const openSearchModal = () => {
+    setIsSearchModalOpen(true);
+  };
+
+  const closeSearchModal = () => {
+    setIsSearchModalOpen(false);
+    setSearchTerm("");
+  };
+
+  const handleSearch = async () => {
+    closeSearchModal();
+
+    try {
+      const response = await fetch(`https://api.tvmaze.com/singlesearch/shows?q=${searchTerm}`);
+      const data = await response.json();
+
+      if (data && data.id) {
+        history.push(`/movies/${data.id}`);
+      } else {
+        console.log("Filme não encontrado");
+      }
+    } catch (error) {
+      console.error("Erro ao buscar o filme:", error);
+    }
+  };
+
   return (
     <Router>
       <div className="header">
@@ -17,16 +47,21 @@ function Header() {
           </a>
         </div>
         <div className="search">
-          <Link to="/movies/search" relative="path">
-            <IoSearch className="icon-search" />
-          </Link>
+          <IoSearch className="icon-search" onClick={openSearchModal} />
         </div>
       </div>
-      <Switch>
-        <Route path="/movies/search">
-
-        </Route>
-      </Switch>
+      {isSearchModalOpen && (
+        <div className="search-modal">
+          <input 
+            type="text" 
+            placeholder="Digite sua busca..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button onClick={handleSearch}>Buscar</button>
+          <button onClick={closeSearchModal}>Fechar</button>
+        </div>
+      )}
     </Router>
   );
 }
