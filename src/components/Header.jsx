@@ -21,7 +21,9 @@ function Header() {
     closeSearchModal();
 
     try {
-      const response = await fetch(`https://api.tvmaze.com/singlesearch/shows?q=${searchTerm}`);
+      const response = await fetch(
+        `https://api.tvmaze.com/singlesearch/shows?q=${searchTerm}`
+      );
       const data = await response.json();
 
       if (data && data.id) {
@@ -52,14 +54,21 @@ function Header() {
       </div>
       {isSearchModalOpen && (
         <div className="search-modal">
-          <input 
-            type="text" 
-            placeholder="Digite sua busca..." 
+          <input
+            className="input-search"
+            type="text"
+            placeholder="Digite sua busca..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button onClick={handleSearch}>Buscar</button>
-          <button onClick={closeSearchModal}>Fechar</button>
+          <div className="div-button-modal">
+            <button className="button-modal" onClick={handleSearch}>
+              Buscar
+            </button>
+            <button className="button-modal" onClick={closeSearchModal}>
+              Fechar
+            </button>
+          </div>
         </div>
       )}
     </Router>
